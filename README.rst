@@ -81,9 +81,23 @@ HISTORY
 
 This manual page was released as part of the libvmod-urlfilter 
 package.
+
+When reviewing logs, we notice strange request urls. Requests 
+originated from malicious script trying to access an admin/ location.
+
+A restriction similar to req.url ~ "^/+admin" didn't succedded with 
+a request url encoded and with relative locations: %2f%2E%2fadmin%2f
+
+We've decided to develop a varnish module to filter client's 
+requests, inspired by coreutils canonicalize.c function:
+http://fossies.org/dox/coreutils-8.21/canonicalize_8c_source.html
+
 We use it, in conjunction with curl.unescape, to secure and sanitize
 strange req.url input like:
 /.../one///two//three///four../five/.%2e/%2E.//six/%2E%2e/%2e./seven
+
+to obtain a more comfortble req.url:
+/.../one/two/seven
 
 COPYRIGHT
 =========
@@ -101,4 +115,4 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-* Copyright (C) 2013 Elemedia S.p.A.
+* Copyright (C) 1996-2013 Free Software Foundation, Inc.
