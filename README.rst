@@ -85,8 +85,8 @@ package.
 When reviewing logs, we notice strange request urls. Requests 
 originated from malicious script trying to access an admin/ location.
 
-A restriction similar to req.url ~ "^/+admin" didn't succedded with 
-a request url encoded and with relative locations: %2f%2E%2fadmin%2f
+A restriction similar to req.url ~ "^/+admin" didn't succeed with a
+request url encoded and with relative locations: %2f%2E%2fadmin%2f
 
 We've decided to develop a varnish module to filter client's 
 requests, inspired by coreutils canonicalize.c function:
